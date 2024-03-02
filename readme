@@ -1,0 +1,42 @@
+
+
+# USB Zero-Fill Tool
+
+This Python script provides a graphical user interface (GUI) for performing zero-fills on USB storage devices. Zero-filling a USB drive clears all data, flags, and settings, effectively resetting it to a blank state. This tool simulates the finishing process as done in the factory.
+
+## Features
+
+- Select a USB drive from the dropdown menu.
+- Refresh the list of available drives.
+- Perform zero-fill operation with the click of a button.
+- Dynamically adjust the window size to fit content.
+- Uses the Breeze Dark theme for a modern look.
+
+## Requirements
+
+- Python 3.x
+- Tkinter (Python's standard GUI library)
+
+## Usage
+
+1. Clone or download the repository to your local machine.
+2. Run the `usb_zero_fill.py` script using Python.
+3. Select the USB drive you want to zero-fill from the dropdown menu.
+4. Click the "Zero Fill" button to start the zero-fill process.
+5. Wait for the process to complete, and check the result displayed in the GUI.
+
+## Notes
+
+- **Caution:** Zero-filling a USB drive will irreversibly erase all data on the selected drive. Use this tool with caution and ensure you have selected the correct drive.
+- **Administrative Privileges:** Depending on your operating system, you may need to run the script with administrative privileges to access certain drives.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request on GitHub.
+
+## License
+
+This project is licensed under the [MIT License].
+
+---
+
