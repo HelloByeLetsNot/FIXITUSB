@@ -82,6 +82,21 @@ def recover_data():
     else:
         result_label.config(text="Please select a drive first.")
 
+def raw_format_drive():
+    selected_drive = drive_var.get()
+    if selected_drive:
+        confirmed = messagebox.askyesno("Confirmation", f"Are you sure you want to format {selected_drive} as raw? This will erase all data on the drive.")
+        if confirmed:
+            try:
+                subprocess.run(["format", "/FS:RAW", "/Q", selected_drive], check=True)
+                result_label.config(text="Drive formatted as raw successfully.")
+            except subprocess.CalledProcessError as e:
+                result_label.config(text=f"Error: {e}")
+        else:
+            result_label.config(text="Operation cancelled.")
+    else:
+        result_label.config(text="Please select a drive first.")
+
 def refresh_drives():
     drives = [chr(i) + ":" for i in range(65, 91) if os.path.exists(chr(i) + ":")]
     drive_dropdown['values'] = drives
@@ -125,17 +140,21 @@ zero_fill_button.grid(column=0, row=3, padx=5, pady=5, sticky=(tk.W, tk.E))
 format_button = ttk.Button(main_frame, text="Format Drive", command=format_drive)
 format_button.grid(column=1, row=3, padx=5, pady=5, sticky=(tk.W, tk.E))
 
-# # Check bad sectors button
+# Raw format button
+raw_format_button = ttk.Button(main_frame, text="Raw Format", command=raw_format_drive)
+raw_format_button.grid(column=0, row=4, padx=5, pady=5, sticky=(tk.W, tk.E))
+
+# Check bad sectors button
 check_bad_sectors_button = ttk.Button(main_frame, text="Check Bad Sectors", command=check_bad_sectors, width=20)
-check_bad_sectors_button.grid(column=0, row=4, padx=(10, 5), pady=10, sticky=(tk.W, tk.E))  # Adjust padx to provide additional padding on the left side
+check_bad_sectors_button.grid(column=0, row=5, padx=(10, 5), pady=10, sticky=(tk.W, tk.E))  # Adjust padx to provide additional padding on the left side
 
 # Recover data button
 recover_data_button = ttk.Button(main_frame, text="Recover Data", command=recover_data)
-recover_data_button.grid(column=1, row=4, padx=5, pady=5, sticky=(tk.W, tk.E))
+recover_data_button.grid(column=1, row=5, padx=5, pady=5, sticky=(tk.W, tk.E))
 
 # Result label
 result_label = ttk.Label(main_frame, text="", wraplength=250)
-result_label.grid(column=0, row=5, columnspan=2, padx=5, pady=5, sticky=(tk.W, tk.E))
+result_label.grid(column=0, row=6, columnspan=2, padx=5, pady=5, sticky=(tk.W, tk.E))
 
 # Start the GUI event loop
 root.mainloop()
